@@ -1,0 +1,19 @@
+{
+    "title": "Espresso",
+    "color": "#B1CADE",
+    "file": "Espresso.mp3",
+    "Author": "Sabrina Carpenter",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/cb/64/8c/cb648cf7-e7bb-bd00-efe0-d744312c29a8/24UMGIM32304.rgb.jpg/1200x1200bf-60.jpg",
+    "lyrics": [
+        { "text": "<music>", "at": "0" },
+        { "text": "Now he's thinkin' 'bout me every night, oh", "at": "9" },
+        { "text": "Is it that sweet? I guess so", "at": "13" },
+        { "text": "Say you can't sleep, baby, I know", "at": "14.5" },
+        { "text": "That's that me Espresso", "at": "17" },
+        { "text": "Move it up, down, left, right, oh", "at": "19.7" },
+        { "text": "Switch it up like Nintendo", "at": "21" },
+        { "text": "Say you can't sleep, baby, I know", "at": "24" },
+        { "text": "I can't relate to desperation", "at": "28.5" },
+        { "text": "And I got this one boy, and he won't stop callin'", "at": "38.5" }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "title": "Not cute anymore",
+    "color": "#E6F1F2",
+    "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Not%20cute%20anymore.mp3",
+    "Author": "ILLIT",
+    "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Album.webp",
+    "lyrics": [
+        { "text": "<music>", "at": "0" },
+        { "text": "용감한 내 가방, no keyring, no hand mirror", "at": "10" },
+        { "text": "Oh, rock will never die, 린다, 린다 자장가", "at": "15" },
+        { "text": "한정판 콩국수 matcha보다 고소해", "at": "20" },
+        { "text": "I'm too shy for all these, 데이트 내내 젤리슈즈", "at": "25" },
+        { "text": "I got Suede on my vinyl, 나의 동화책", "at": "29" },
+        { "text": "I'm not cute anymore (uh-uh)", "at": "37" },
+        { "text": "I'm not cute anymore (uh-uh), 안 돼 no more", "at": "41" },
+        { "text": "강아지보단 난 느슨한 해파리가 좋아 (uh-uh)", "at": "49" },
+        { "text": "'Cause I'm not cute anymore", "at": "56" },
+        { "text": "오분 컷 완벽한 my makeup tutorial", "at": "61" },
+        { "text": "When I get super stressed, 공포영화 좀 볼까?", "at": "66" },
+        { "text": "근데 넌 멀었어, oh, I don't like cherry coke", "at": "71" },
+        { "text": "난 외계인이 아냐, 그냥 털털한 편인 거야", "at": "76" },
+        { "text": "I got Suede on my vinyl, 나의 동화책", "at": "80" },
+        { "text": "I'm not cute anymore (uh-uh)", "at": "87" },
+        { "text": "I'm not cute anymore (uh-uh), 안 돼 no more", "at": "92" },
+        { "text": "강아지보단 난 느슨한 해파리가 좋아 (uh-uh)", "at": "100" },
+        { "text": "'Cause I'm not cute anymore", "at": "107" }
+    ]
+}

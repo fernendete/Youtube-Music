@@ -1,0 +1,16 @@
+{
+    "title": "Dracula",
+    "color": "#2F361C",
+    "file": "Dracula.mp3",
+    "Author": "Tame Impala",
+    "cover": "https://images.genius.com/b4e23951821d47b9035a7cb2038fa352.1000x1000x1.png",
+    "lyrics": [
+        { "text": "Oh (you and me)", "at": "0" },
+        { "text": "Oh", "at": "4" },
+        { "text": "Hm", "at": "13" },
+        { "text": "Dracula (banda-bing, banda-boom)", "at": "20" },
+        { "text": "Dracula", "at": "24" },
+        { "text": "The mornin' light is turin' blue, the feelin' is bizarre (bizarre)", "at": "29" },
+        { "text": "The night is almost over, I still don't know where you are", "at": "33" }
+    ]
+}
