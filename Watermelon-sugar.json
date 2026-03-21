@@ -2,11 +2,11 @@
     "title": "Watermelon Sugar",
     "color": "#03BFE5",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Watermelon sugar.mp3",
-    "Author": "Sabrina Carpenter",
+    "Author": "Harry Styles",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/watermelon-sugar-cover.jpg",
     "lyrics": [
         { "text": "Tastes like strawberries on a summer evenin'", "at": "0" },
-        { "text": "nd it sounds just like a song", "at": "7" },
+        { "text": "And it sounds just like a song", "at": "7" },
         { "text": "I want more berries and that summer feelin'", "at": "11" },
         { "text": "TaIt's so wonderful and warm", "at": "17" },
         { "text": "Breathe me in, breathe me out", "at": "20" },
