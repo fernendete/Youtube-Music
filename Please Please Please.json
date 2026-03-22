@@ -4,6 +4,7 @@
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/please_please_please-sabrina.mp3",
     "karaoke": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Please Please Please (Instrumental).mp3",
     "Author": "Sabrina Carpenter",
+    "author-file": "sabrina-carpenter.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/please_please_please-album.png",
     "lyrics": [
         { "text": "<music>", "at": "0" },
