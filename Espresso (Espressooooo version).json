@@ -6,5 +6,13 @@
     "tags": ["remix"],
     "author_file": "sabrina-carpenter.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Esrpesso versions.jpg",
-    "lyrics": []
+    "lyrics": [
+        { "text": "<music>", "at": "0:00" },
+        { "text": "Yes", "at": "0:37" },
+        { "text": "Yes", "at": "0:41" },
+        { "text": "Yes", "at": "0:46" },
+        { "text": "Yes", "at": "0:51" },
+        { "text": "Now he's thinkin' 'bout me every night oh", "at": "0:55" },
+        { "text": "Is it that sweet? I guess so", "at": "0:58" }
+    ]
 }
