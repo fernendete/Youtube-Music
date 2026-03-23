@@ -3,6 +3,7 @@
     "color": "#e8e8e8",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/stay with me.mp3",
     "Author": "Miki Matsubara",
+    "author_file": "miki-matsubara.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/stay-with-me-cover.png",
     "lyrics": [
         { "text": "To you, yes my love to you", "at": "0" },

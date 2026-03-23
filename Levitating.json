@@ -3,6 +3,7 @@
     "color": "#E1B0CA",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Levitating.mp3",
     "Author": "Dua Lipa",
+    "author_file": "dua-lipa.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Levetating-cover.png",
     "lyrics": [
      { "text": "<music>", "at": "0" },
