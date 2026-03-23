@@ -3,7 +3,8 @@
     "color": "#B1CADE",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/cupid sabrina.mp3",
     "Author": "FIFTY FIFTY",
-    "tags": ["Collab"],
+    "tags": ["Collab", "remix"],
+    "author_file": "fifty-fifty.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Cupids-cover.png",
     "lyrics": []
 }
