@@ -3,6 +3,7 @@
     "color": "#03BFE5",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Ed Sheeran - Sapphire.mp3",
     "Author": "Ed Sheeran",
+    "author_file": "ed-sherran.json",
     "cover": "https://i.scdn.co/image/ab67616d0000b2736fbb60d6a7e03ccb940a518e",
     "lyrics": [
         { "text": "You're glowing, you colour and fracture the light", "at": "0" },
