@@ -3,6 +3,7 @@
     "color": "#b6fd46",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Thecure.mp3",
     "Author": "Lady gaga",
+    "author_file": "lady-gaga.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Thecure-cover.png",
     "lyrics": []
 }
