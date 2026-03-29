@@ -1,0 +1,388 @@
+setTimeout(() => {
+    window.scrollTo(0, 0)
+}, 300)
+let sng = {}
+let playing = false
+let sngDur = 0
+let curLyc = -1
+let lyrics = []
+let currentTab = 1
+let hasLyrics = false
+let songs = []
+let playlist = []
+$(document).on("click", ".tab", function () {
+    $(this).addClass("active").siblings("*").removeClass("active")
+})
+$("#arrow-down").on("click", minimizePlayer)
+$("#arrow-down").on("touchstart", minimizePlayer)
+function minimizePlayer() {
+    $("#song-container").addClass("min")
+    setTimeout(() => {
+        $("#song-container").one("click", () => {
+            $("#song-container").removeClass("min")
+        })
+    }, 270)
+}
+$("#player #author").on("click", function () {
+    if (!sng.author_file) return
+    loadChannel(sng.author_file)
+})
+function loadSong(song) {
+    fetch(`${song}?nocache=${Date.now()}`)
+        .then(d => d.json())
+        .then(t => {
+            sng = {
+                ...t,
+                directory: song
+            }
+            if (!$("#song-list").children("*").length) {
+                makePlaylist()
+            }
+            $("#player #cover, #min-objects #cover, #blurry-bck").css("background-image", `url("${t.cover}")`)
+            $("#player #title, #min-objects #title").text(t.title)
+            $("#player #author").text(t.Author).attr("link", t.author_file)
+            console.log("author: ", t.author_file)
+            $("body").css("--songColor", t.color)
+            $("#player #cover").addClass("load")
+            let audio = new Audio(t.file)
+            audio.oncanplaythrough = () => {
+                $("#player #cover").removeClass("load")
+                sngDur = audio.duration
+                $("#song-audio").attr("src", t.file)[0].play()
+                playing = true
+                currentTab = 1
+                $("#play-button").removeClass("pause")
+                $("#lyrics").removeClass("loading")
+            }
+            $("#lyrics").addClass("loading")
+            LoadLyrics(t.lyrics)
+            $("#karaoke-bt").show()
+            if (!hasLyrics || !sng.karaoke) {
+                $("#karaoke-bt").hide()
+            }
+        })
+    function LoadLyrics(l) {
+        $("#right-menu #lyrics").empty()
+        let fix = []
+        for (let ly of l) {
+            let fixed = ly
+            console.log("f")
+            if (fixed["at"].includes(":")) {
+                console.log("AAA")
+                time = ly["at"].split(":")
+                fixed.at = (time[0] * 60) + time[1] 
+            }
+            fix.push(fixed)
+        }
+        if (!l.length) {
+            hasLyrics = false
+            return
+        }
+        lyrics = fix.map((lr, x) => ({ ...lr, idx: x }))
+        for (let ly of l) {
+            let stanza = $("<div>", { class: "stanza", time: ly.at })
+            if (ly.text != "<music>") {
+                stanza.text(ly.text)
+            } else {
+                let musicCon = makeSoundContElement()
+                stanza.append(musicCon)
+            }
+            $("#right-menu #lyrics").append(stanza)
+        }
+        hasLyrics = true
+    }
+}
+$("#karaoke-bt").on("click", startKaraoke)
+function startKaraoke() {
+    $("#player #cover").addClass("load")
+    $("#lyrics").addClass("loading")
+    $("#full-bt").trigger("click")
+    let moment = $("#song-audio").get(0).currentTime
+    const El = $("#song-audio").get(0)
+    El.pause()
+    El.src = sng.karaoke
+    El.onloadeddata = function () {
+        El.currentTime = moment
+        El.play()
+        $("#player #cover").removeClass("load")
+        $("#lyrics").removeClass("loading")
+    }
+}
+function start() {
+    fetch("https://api.github.com/repos/fernendete/Youtube-music/contents/" + "?nocache=" + Date.now()).then(d => d.json()).then(text => {
+        text.filter(g => g.name.endsWith(".json")).forEach(f => {
+            let directory = f.download_url
+            console.log(directory.split(".").pop())
+            if (!directory) {
+                return
+            }
+            songs.push(directory)
+            let xhr = new XMLHttpRequest()
+            xhr.open("GET", directory)
+            xhr.onload = () => {
+                let t = JSON.parse(xhr.response)
+                let song = $("<div>", { class: "song-cell", song: directory })
+                let photo = $("<div>", { class: "photo not-loaded" })
+                let name = $("<div>", { class: "name" }).text(t.title)
+                let author = $("<div>", { class: "author" }).text(t.Author)
+                let img = new Image()
+                img.src = t.cover
+                img.onload = function () {
+                    photo.css("backgroundImage", `url("${t.cover}")`).removeClass("not-loaded")
+                }
+                song.append(photo, name, author)
+                $("#songs-scroll").append(song)
+            }
+            xhr.send()
+        })
+    })
+    makePlaylist()
+
+}
+start()
+$(document).on("click", ".song-cell", function () {
+    loadSong($(this).attr("song"))
+    $("#song-container").removeClass("min")
+})
+$(document).on("click", "#min-objects", function () {
+    console.log("AAAA")
+    if (isPhone()) {
+        $("#song-container").removeClass("right-menu-up")
+    }
+})
+$("#play-button, #min-objects #pause").on("click", function () {
+    let t = $("#play-button, #min-objects #pause")
+    if (playing) {
+        playing = false
+        t.removeClass("pause")
+        $("#song-audio")[0].play()
+    } else {
+        playing = true
+        t.addClass("pause")
+        $("#song-audio")[0].pause()
+    }
+})
+$("#song-audio").on("timeupdate", function () {
+    $("#bar #fill").css("width", `${(this.currentTime / sngDur) * 100}%`)
+    $("#bar #time").text(`${Math.floor(this.currentTime / 60)}:${(Math.round(this.currentTime) % 60).toString().padStart(2, "0")}`)
+    $("#bar #time-left").text(`${Math.floor(sngDur / 60)}:${(Math.round(sngDur % 60)).toString().padStart(2, "0")}`)
+    if ($("#song-container").hasClass("min") || currentTab != 2 || !hasLyrics) return
+    let last = lyrics.findLast(l => l.at <= this.currentTime).idx
+    if (!last || curLyc != last) {
+        curLyc = last
+        $(".stanza").eq(last).addClass('focus').siblings().removeClass("focus")
+        scrollLyricsCircOut($(".stanza").eq(last))
+    }
+})
+function startBckAnim() {
+    function changePos() {
+        $("#blurry-bck").css({
+            "background-position": `${randomRange(1, 100)}% ${randomRange(1, 100)}%`
+        })
+    }
+    changePos()
+    setInterval(changePos, randomRange(20, 25) * 1000)
+}
+function randomRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function isPhone() {
+    return innerWidth <= 686
+}
+$(document).on('wheel', "*", function (e) {
+    e.stopPropagation()
+});
+function makePlaylist() {
+    let added = []
+    console.log(sng.directory)
+    playlist.push(sng.directory)
+    added.push(songs.indexOf(sng.directory))
+    for (let i = 0; i < randomRange(songs.length / 2, songs.length - 1); i++) {
+        let song = randomRange(0, songs.length - 1)
+        if (added.includes(song)) continue
+        playlist.push(songs[song])
+        added.push(song)
+    }
+    for (let s of playlist) {
+        fetch(s).then(d => d.json()).then(sng => {
+            let cont = $("<div>", { class: "song", song: s })
+            let img = new Image()
+            img.src = sng.cover
+            img.onload = function () {
+                cover.removeClass("not-loaded")
+            }
+            let cover = $("<div>", { class: "cover not-loaded" }).css("background-image", `url("${sng.cover}")`)
+            let title = $("<div>", { class: "title" }).text(sng.title)
+            let author = $("<div>", { class: "author" }).text(sng.Author)
+            cont.append(cover, $("<div>", { class: "title-cont" }).append(title, author))
+            if (s.includes(sng.directory)) {
+                cont.find(".cover").append(makeSoundContElement())
+            }
+            cont.on("click", () => {
+                cont.addClass("current").siblings().removeClass("current").children(".sound-container").remove()
+                cont.find(".cover").append(makeSoundContElement())
+                loadSong(s)
+            })
+            $("#song-list").append(cont)
+        })
+    }
+}
+function makeSoundContElement() {
+    let musicCon = $("<div>", { class: "sound-container" })
+    for (let i = 0; i < 3; i++) {
+        let bar = $("<div>", { class: "bar", id: `bar-${i + 1}` })
+        musicCon.append(bar)
+    }
+    return musicCon
+}
+$("#full-bt").on("click", function () {
+    startBckAnim()
+    if (!hasLyrics) {
+        $("#player").css({
+            translate: "0 75px",
+            opacity: "0"
+        })
+    } else {
+        $("#player").css({
+            translate: "-75px",
+            opacity: "0"
+        })
+    }
+    $("#right-menu").css({
+        transform: "translateX(75px)",
+        opacity: "0"
+    })
+    setTimeout(() => {
+        $("#player").insertAfter("#right-menu")
+        $("#player, #right-menu").removeAttr('style')
+        $("#song-container").addClass("full")
+        currentTab = 2
+        if (!hasLyrics) {
+            $("#song-container").addClass("no-lyrics")
+        }
+        $("#exit-full").css("display", "flex")
+    }, 270)
+})
+let currentLyric = -1;
+let lyricScrollAnimation = null;
+
+function scrollLyricsCircOut($el) {
+
+    if (lyricScrollAnimation) cancelAnimationFrame(lyricScrollAnimation);
+
+    requestAnimationFrame(() => {
+
+        let $parent = $el.parent();
+
+        let parentScroll = $parent.scrollTop();
+        let parentHeight = $parent.innerHeight();
+
+        let elTop = $el.position().top;
+        let elHeight = $el.outerHeight();
+
+        let target = (parentScroll + elTop - (parentHeight / 2) + (elHeight / 2)) + (parentHeight / 6);
+
+        let start = parentScroll;
+        let distance = target - start;
+        let duration = 500;
+        let startTime = performance.now();
+
+        function circOut(t) {
+            return Math.sqrt(1 - Math.pow(t - 1, 2));
+        }
+
+        function animate(now) {
+            let elapsed = now - startTime;
+            let progress = Math.min(elapsed / duration, 1);
+
+            let eased = circOut(progress);
+            $parent.scrollTop(start + distance * eased);
+
+            if (progress < 1) {
+                lyricScrollAnimation = requestAnimationFrame(animate);
+            }
+        }
+
+        lyricScrollAnimation = requestAnimationFrame(animate);
+    });
+}
+
+
+
+
+
+$(document).on("click", ".stanza", function () {
+    $("#song-audio").get(0).currentTime = parseInt($(this).attr("time")) + 0.01
+})
+
+function nextSong() {
+    let curIdx = playlist.indexOf(sng.title)
+    console.log()
+}
+
+
+$("#exit-full").on("click", function () {
+    $("#song-container").removeClass("full").removeClass("no-lyrics")
+    $("#player").insertBefore("#right-menu")
+    currentTab = 1
+    $("#exit-full").hide()
+})
+function loadChannel(channel) {
+    minimizePlayer()
+    $("#content #channel").show()
+    fetch(`https://raw.githubusercontent.com/fernendete/Youtube-Music/main/artists/${channel}`)
+        .then(d => d.json())
+        .then(t => {
+            $("#channel #banner").css("background-image", `url("${t.banner_image}")`)
+            $("#channel #artist-name").text(t.display_name)
+            for (let Song of t.Realases) {
+                fetch(`https://raw.githubusercontent.com/fernendete/Youtube-Music/main/${Song}`).then(d => d.json()).then(f => {
+                    let song = $("<div>", { class: "song-cell big", song: `https://raw.githubusercontent.com/fernendete/Youtube-Music/main/${Song}` })
+                    let cover = $("<div>", { class: "photo" }).css("background-image", `url("${f.cover}")`)
+                    let name = $("<div>", { class: 'name' }).text(f.title)
+                    let author = $("<div>", { class: 'author' }).text(f.Author)
+                    song.append(cover, name, author)
+                    $("#channel #rows .song-cont#popular").append(song)
+                    if (f.tags?.includes("remix")) {
+                        $("#channel #rows .song-cont#remixes").append(song)
+                    }
+                })
+            }
+        })
+}
+$("#tabs #list-tab").on("click", () => {
+    currentTab = 1
+    $("#song-list").show()
+    $("#lyrics").hide()
+    $("#song-list").show()
+    $("#lyrics").hide()
+    if (isPhone()) {
+        $("#song-container").addClass("right-menu-up")
+        $("#min-objects").on("click", function () {
+            if ($(this).attr("id") != "min-objects") return
+            $(this).off("click")
+            $("#song-container").removeClass("right-menu-up")
+        })
+    }
+})
+$("#tabs #lyr-tab").on("click", () => {
+    currentTab = 2
+    $("#song-list").hide()
+    $("#lyrics").show()
+    if (isPhone()) {
+        $("#song-container").addClass("right-menu-up")
+        $("#min-objects").one("click", () => {
+            $("#song-container").removeClass("right-menu-up")
+        })
+    }
+})
+$("#top-bar #search").on("click", function () {
+    $("#search-dialog").show()
+    $("#search-dialog textarea").focus()
+    setTimeout(() => {
+        $(document).one("click.out", function () {
+            if (!$(this).closest("#search-dialog").length) $("#search-dialog").hide()
+        })
+
+    }, 270)
+})
