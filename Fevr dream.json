@@ -3,6 +3,7 @@
     "color": "#E1B0CA",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/FEVER DREAM.mp3",
     "Author": "Alex Warren",
+    "author_file": "alex-warren.json",
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/fever-dream-album.png",
     "lyrics": []
 }

@@ -3,6 +3,7 @@
     "color": "#113508",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Carry you home.mp3",
     "Author": "Alex Warren",
+    "author_file": "alex-warren.json", 
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/alex-warren-album-cover.png",
     "lyrics": [
         { "text": "Oh, I hope you know I will carry you home", "at": "0" },
