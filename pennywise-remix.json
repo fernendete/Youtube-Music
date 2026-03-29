@@ -3,6 +3,7 @@
     "color": "#375a1a",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/pennywise-remix.mp3",
     "Author": "Subwaytocoman",
+    "author_file": "subwaytacoman.json",
     "tags": ["remix"],
     "cover": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/pennywise-remix-cover.png",
     "lyrics": []
