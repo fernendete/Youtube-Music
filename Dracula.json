@@ -3,6 +3,7 @@
     "color": "#2F361C",
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/Dracula.mp3",
     "Author": "Tame Impala",
+    "author_file": "tame-impala.json",
     "cover": "https://images.genius.com/b4e23951821d47b9035a7cb2038fa352.1000x1000x1.png",
     "lyrics": [
         { "text": "Oh (you and me)", "at": "0" },
