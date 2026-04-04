@@ -4,6 +4,27 @@
     "file": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/suerte v1.mp3",
     "Author": "Shakira",
     "author_file": "shakira.json",
+    "lrc": "https://raw.githubusercontent.com/fernendete/Youtube-Music/main/shakira-suerte-whenever-whenever",
     "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Laundry_Service_cover.png/250px-Laundry_Service_cover.png",
-    "lyrics": []
+    "lyrics": [
+        { "text": "<music>", "at": "0:00" },
+        { "text": "Suerte que en el sur hayas nacido", "at": "0:16" },
+        { "text": "Y que burlemos las distancias", "at": "0:19" },
+        { "text": "Suerte que es haberte conocido", "at": "0:21" },
+        { "text": "Y por ti amar tierras extrañas", "at": "0:23" },
+        { "text": "Yo puedo escalar los Andes solo", "at": "0:25" },
+        { "text": "Por ir a contar tus lunares", "at": "0:28" },
+        { "text": "Contigo celebro y sufro todo", "at": "0:30" },
+        { "text": "Mis alegrias y mis males", "at": "0:32" },
+        { "text": "Lero-lole-lole, lero-lole-lole", "at": "0:34" },
+        { "text": "Sabes que estoy a tus pies", "at": "0:38" },
+        { "text": "Contigo, mi vida", "at": "0:43" },
+        { "text": "Quiero vivir la vida", "at": "0:45" },
+        { "text": "Y lo que me queda de vida", "at": "0:47" },
+        { "text": "Quiero vivir contigo", "at": "0:50" },
+        { "text": "Contigo mi vida", "at": "0:47" },
+        { "text": "Y lo que me queda de vida", "at": "0:47" },
+        { "text": "Y lo que me queda de vida", "at": "0:47" },
+        { "text": "Y lo que me queda de vida", "at": "0:47" }
+    ]
 }
